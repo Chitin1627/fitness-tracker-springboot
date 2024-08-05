@@ -2,7 +2,10 @@ package dev.pra.runnerz.run;
 
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/runs")
 public class RunController {
+
     private final RunRepository runRepository;
 
     public RunController(RunRepository runRepository) {
@@ -21,30 +25,30 @@ public class RunController {
     List<Run> findAll() {
         return runRepository.findAll();
     }
-
-    @GetMapping("/{id}")
-    Run findById(@PathVariable Integer id) {
-        Optional<Run> run = runRepository.findById(id);
-        if(run.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return run.get();
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("")
-    void create(@Valid @RequestBody Run run) {
-        runRepository.create(run);
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{id}")
-    void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
-        runRepository.update(run, id);
-    }
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id) {
-        runRepository.delete(id);
-    }
+//
+//    @GetMapping("/{id}")
+//    Run findById(@PathVariable Integer id) {
+//        Optional<Run> run = runRepository.findById(id);
+//        if(run.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+//        }
+//        return run.get();
+//    }
+//
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping("")
+//    void create(@Valid @RequestBody Run run) {
+//        runRepository.create(run);
+//    }
+//
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @PutMapping("/{id}")
+//    void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
+//        runRepository.update(run, id);
+//    }
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @DeleteMapping("/{id}")
+//    void delete(@PathVariable Integer id) {
+//        runRepository.delete(id);
+//    }
 }
