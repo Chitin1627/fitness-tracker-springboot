@@ -38,7 +38,14 @@ public class RunController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
-        runRepository.save(run);
+        runRepository.update(
+                run.title(),
+                run.startedOn(),
+                run.completedOn(),
+                run.miles(),
+                run.location().toString(),
+                id
+        );
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
