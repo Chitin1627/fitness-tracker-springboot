@@ -7,7 +7,7 @@ import org.springframework.web.service.annotation.GetExchange;
 import java.util.List;
 
 public interface UserHttpClient {
-    @GetExchange("/api/runs")
+    @GetExchange("/users")
     List<User> findAll();
 
     @GetExchange("/{id}")
